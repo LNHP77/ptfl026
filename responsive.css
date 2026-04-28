@@ -5,6 +5,10 @@
 /* Tablets et mobiles (max-width: 991px) */
 @media (max-width: 991px) {
 
+    .circle {
+        visibility: hidden !important;
+    }
+    
     /* Hero */
     .hero {
         text-align: center;
@@ -150,6 +154,10 @@
 
 /* Mobiles uniquement (max-width: 768px) */
 @media (max-width: 768px) {
+    .circle {
+        visibility: hidden !important;
+    }
+    
     .hero-img img {
         max-width: 300px;
     }
@@ -376,6 +384,10 @@
 
 /* Tablets (768px - 1366px) */
 @media (min-width: 768px) and (max-width: 1366px) {
+    .circle {
+        visibility: hidden !important;
+    }
+    
     .hero-img img {
         max-width: 480px;
     }
@@ -393,6 +405,10 @@
 
 /* Grands écrans (min-width: 992px) */
 @media (min-width: 992px) {
+    .circle {
+        visibility: hidden !important;
+    }
+    
     .contact-wrapper {
         flex-direction: row;
     }
