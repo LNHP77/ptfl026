@@ -405,10 +405,6 @@
 
 /* Grands écrans (min-width: 992px) */
 @media (min-width: 992px) {
-    .circle {
-        visibility: hidden !important;
-    }
-    
     .contact-wrapper {
         flex-direction: row;
     }
