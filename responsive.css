@@ -1,0 +1,421 @@
+/* Responsive */
+/* Responsivité pour mobile */
+/* ==================== RESPONSIVE SIMPLIFIÉ ==================== */
+
+/* Tablets et mobiles (max-width: 991px) */
+@media (max-width: 991px) {
+
+    /* Hero */
+    .hero {
+        text-align: center;
+    }
+
+    .hero-img img {
+        max-width: 280px;
+    }
+
+    /* Typographie */
+    h1 {
+        font-size: 2.5rem !important;
+        line-height: 1.2 !important;
+    }
+
+    h2 {
+        font-size: 2rem !important;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    /* Texte */
+    .text-content {
+        text-align: center;
+    }
+
+    /* Video hero */
+    .video-hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .video-hero p {
+        font-size: 0.9rem;
+    }
+
+    /* Timeline */
+    .timeline-container::after {
+        left: 31px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+        text-align: left;
+    }
+
+    .timeline-item::after {
+        left: 23px;
+    }
+
+    .right {
+        left: 0;
+    }
+
+    .timeline-date {
+        position: relative;
+        top: 0;
+        left: 0 !important;
+        text-align: left !important;
+        margin-bottom: 10px;
+    }
+
+    /* Modal */
+    .modal-split {
+        flex-direction: column;
+    }
+
+    .modal-image {
+        min-height: 250px;
+    }
+
+    .modal-content-right {
+        padding: 1.5rem;
+    }
+
+    .project-title {
+        font-size: 1.8rem;
+    }
+
+    /* Slider */
+    .slider-nav {
+        width: 35px;
+        height: 35px;
+    }
+
+    .prev-btn {
+        left: 10px;
+    }
+
+    .next-btn {
+        right: 10px;
+    }
+
+    .slider-dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .slider-dot.active {
+        width: 20px;
+    }
+
+    /* Contact */
+    .contact-wrapper {
+        flex-direction: column;
+    }
+
+    .contact-form-container {
+        padding: 30px 20px;
+    }
+
+    .contact-info-header h3 {
+        font-size: 1.5rem;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .modal-legal .modal-dialog {
+        max-width: 85%;
+    }
+
+    .modal-legal .modal-body {
+        padding: 20px;
+        max-height: 65vh;
+    }
+
+    .modal-legal .modal-title {
+        font-size: 1.2rem;
+    }
+
+.footer-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+}
+
+/* Mobiles uniquement (max-width: 768px) */
+@media (max-width: 768px) {
+    .hero-img img {
+        max-width: 300px;
+    }
+
+    h1 {
+        font-size: 70px !important;
+        line-height: 78px !important;
+    }
+
+    .video-bg {
+        width: auto;
+        height: 100%;
+        min-width: 100%;
+    }
+
+    .close-btn {
+        top: 10px;
+        right: 10px;
+    }
+
+    .contact-section {
+        padding: 60px 20px;
+    }
+
+    .contact-info-overlay {
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        padding: 15px;
+    }
+
+    .contact-icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .modal-custom .modal-dialog {
+        max-width: 95%;
+        width: 98%;
+        margin: 0.5rem auto;
+    }
+
+    .modal-custom .modal-content {
+        border-radius: 20px;
+    }
+
+    .modal-split {
+        flex-direction: column;
+    }
+
+    .modal-image {
+        min-height: 220px;
+        max-height: 250px;
+    }
+
+    .modal-content-right {
+        padding: 1.2rem;
+        max-height: 55vh;
+    }
+
+    /* Typographie mobile */
+    .project-title {
+        font-size: 1.5rem;
+        margin-top: 0;
+        margin-bottom: 0.8rem;
+    }
+
+    .tech-tags {
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .tech-tag {
+        font-size: 0.7rem;
+        padding: 4px 12px;
+    }
+
+    .tech-tag::before {
+        margin-right: 5px;
+    }
+
+    .section-title {
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+    }
+
+    .section-text {
+        font-size: 0.85rem;
+    }
+
+    .features-list li {
+        font-size: 0.85rem;
+        padding: 0.3rem 0;
+        padding-left: 1.2rem;
+    }
+
+    .info-section {
+        margin-top: 1rem;
+    }
+
+    /* Boutons mobile */
+    .slider-nav {
+        width: 32px;
+        height: 32px;
+    }
+
+    .slider-nav svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .prev-btn {
+        left: 5px;
+    }
+
+    .next-btn {
+        right: 5px;
+    }
+
+    .close-btn {
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .link-btn {
+        padding: 6px 16px;
+        font-size: 0.8rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .link-btn svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    /* Indicateurs mobile */
+    .slider-dots {
+        bottom: 10px;
+        gap: 6px;
+        padding: 4px 10px;
+    }
+
+    .slider-dot {
+        width: 6px;
+        height: 6px;
+    }
+
+    .slider-dot.active {
+        width: 16px;
+    }
+
+    #mentionsModal .modal-dialog {
+        min-width: 100px !important;
+        max-width: 350px !important;
+    }
+
+    .modal-legal .modal-dialog {
+        max-width: 95% !important;
+        margin: 0.5rem auto !important;
+    }
+
+    .modal-legal .modal-content {
+        border-radius: 25px !important;
+    }
+
+    .modal-legal .modal-header {
+        padding: 12px 15px !important;
+    }
+
+    .modal-legal .modal-body {
+        padding: 15px !important;
+        max-height: 70vh  !important;
+    }
+
+    .modal-legal .modal-title {
+        font-size: 1rem !important;
+    }
+
+    .legal-section h4 {
+        font-size: 0.9rem !important;
+    }
+
+    .legal-section p {
+        font-size: 12px !important;
+    }
+
+    .btn-close-legal {
+        width: 28px !important;
+        height: 28px !important;
+    }
+
+.footer {
+    padding: 40px 20px 20px;
+}
+
+.footer-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+.footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+}
+
+.footer-col h4::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.footer-col {
+    text-align: center;
+}
+
+.footer-social {
+    justify-content: center;
+}
+
+.footer-contact li {
+    justify-content: center;
+}
+
+}
+
+/* Tablets (768px - 1366px) */
+@media (min-width: 768px) and (max-width: 1366px) {
+    .hero-img img {
+        max-width: 480px;
+    }
+
+    .hero-img {
+        padding: 50px;
+    }
+
+    .video-bg {
+        width: auto !important;
+        height: 100% !important;
+        min-width: 100% !important;
+    }
+}
+
+/* Grands écrans (min-width: 992px) */
+@media (min-width: 992px) {
+    .contact-wrapper {
+        flex-direction: row;
+    }
+
+    .contact-image-container {
+        min-height: 500px;
+    }
+}
+
+
+
+/* Toutes les couleurs (unifié) */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+.nav-link {
+    color: var(--text-color) !important;
+}
