@@ -68,6 +68,15 @@ body {
     transition: background 0.4s ease, color 0.4s ease;
 }
 
+html {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+body {
+    width: 100%;
+    position: relative;
+}
 .hero, .about-section, .experiences, .realisations, .projects, .contact, .footer{
     background: var(--bg-color) !important;
     /* Laisse le body gérer le fond */
