@@ -35,10 +35,163 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // 6. Animations au scroll
     initScrollAnimations();
-    
+
     // 7. Navbar
     initNavbar();
+
+    // 8. Animation texte hero
+    initHeroTextAnimation();
+
+    // 9. Filtres projets
+    initFilterButtons();
+
+    // 10. Lightbox pour les ai-gcard
+    initLightbox();
 });
+
+// ==================== LIGHTBOX ====================
+function initLightbox() {
+    const overlay = document.getElementById('lightbox');
+    const img     = document.getElementById('lightbox-img');
+    const closeBtn = overlay.querySelector('.lightbox-close');
+    if (!overlay || !img) return;
+
+    const cursorEl = document.querySelector('.cursor');
+
+    function open(url) {
+        img.src = url;
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        if (cursorEl) cursorEl.style.visibility = 'hidden';
+        document.body.style.cursor = 'zoom-out';
+    }
+    function close() {
+        overlay.classList.remove('active');
+        img.src = '';
+        document.body.style.overflow = '';
+        if (cursorEl) cursorEl.style.visibility = 'visible';
+        document.body.style.cursor = document.querySelector('.modal.show') ? 'auto' : 'none';
+    }
+
+    document.addEventListener('click', e => {
+        const card = e.target.closest('.ai-gcard:not(.ai-gcard-stat)');
+        if (card) {
+            const bg = card.style.backgroundImage;
+            const match = bg.match(/url\(["']?(.+?)["']?\)/);
+            if (match) open(match[1]);
+        }
+    });
+
+    closeBtn.addEventListener('click', e => { e.stopPropagation(); close(); });
+    overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+
+    document.addEventListener('mouseover', e => {
+        if (e.target.closest('.ai-gcard:not(.ai-gcard-stat)')) {
+            if (cursorEl) cursorEl.style.visibility = 'hidden';
+            document.body.style.cursor = 'zoom-in';
+        }
+    });
+    document.addEventListener('mouseout', e => {
+        if (e.target.closest('.ai-gcard:not(.ai-gcard-stat)')) {
+            if (cursorEl) cursorEl.style.visibility = 'visible';
+            document.body.style.cursor = document.querySelector('.modal.show') ? 'auto' : 'none';
+        }
+    });
+}
+
+// ==================== NAVBAR ====================
+function initNavbar() {
+    const navbar = document.querySelector('.navbar');
+    if (!navbar) return;
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('navbar-scrolled', window.scrollY > 50);
+    });
+}
+
+// ==================== FILTRES PROJETS ====================
+function initFilterButtons() {
+    const buttons = document.querySelectorAll('.btn-filter[data-filter]');
+    const items = document.querySelectorAll('.project-filter-item');
+
+    function applyFilter(filter) {
+        items.forEach(item => {
+            if (item.dataset.category === filter) {
+                item.classList.remove('filter-hidden');
+                item.classList.add('filter-appear');
+                item.addEventListener('animationend', () => item.classList.remove('filter-appear'), { once: true });
+            } else {
+                item.classList.add('filter-hidden');
+            }
+        });
+    }
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            applyFilter(btn.dataset.filter);
+        });
+    });
+
+    const activeBtn = document.querySelector('.btn-filter.active');
+    if (activeBtn) applyFilter(activeBtn.dataset.filter);
+}
+
+// ==================== ANIMATIONS AU SCROLL ====================
+function initScrollAnimations() {
+    const selectors = [
+        '.card-custom',
+        '.timeline-item',
+        '.project-card',
+        '.hero .col-lg-6',
+        '.divider',
+    ];
+
+    selectors.forEach(sel => {
+        document.querySelectorAll(sel).forEach(el => {
+            el.classList.add('reveal');
+        });
+    });
+
+    // Stagger les éléments dans un même .row
+    document.querySelectorAll('.row').forEach(row => {
+        row.querySelectorAll('.reveal').forEach((el, i) => {
+            el.style.transitionDelay = `${i * 0.12}s`;
+        });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+// ==================== ANIMATION TEXTE HERO ====================
+function initHeroTextAnimation() {
+    const title = document.querySelector('.video-hero h1');
+    const subtitle = document.querySelector('.video-hero h6');
+
+    if (title) {
+        const text = title.textContent.trim();
+        const charCount = text.length;
+        title.innerHTML = text.split('').map((ch, i) =>
+            `<span class="hero-letter" style="animation-delay:${(i * 0.07).toFixed(2)}s">${ch === ' ' ? '&nbsp;' : ch}</span>`
+        ).join('');
+
+        if (subtitle) {
+            const delay = (charCount * 0.07 + 0.2).toFixed(2);
+            subtitle.style.opacity = '0';
+            subtitle.style.animation = `heroFadeIn 0.7s ease ${delay}s forwards`;
+        }
+    }
+}
 
 // ==================== SCROLL PROGRESS ====================
 let calcScrollValue = () => {
@@ -148,108 +301,236 @@ function handleCursorOnModal() {
         });
     });
     
+    let savedScrollY = 0;
+
     modals.forEach(modal => {
         observer.observe(modal, { attributes: true });
-        
-        // Écouter les événements Bootstrap
-        modal.addEventListener('show.bs.modal', () => setCursorVisibility(false));
-        modal.addEventListener('hidden.bs.modal', () => setCursorVisibility(true));
+
+        modal.addEventListener('show.bs.modal', () => {
+            savedScrollY = window.scrollY;
+            setCursorVisibility(false);
+        });
+        modal.addEventListener('hidden.bs.modal', () => {
+            setCursorVisibility(true);
+            window.scrollTo({ top: savedScrollY, behavior: 'instant' });
+        });
     });
 }
 
 // ==================== SLIDER PROJETS ====================
 // Données des projets
+// Modale 1 : indices 0-7 | Modale 2 : indices 8-11
 const projectsData = [
-    {
-        id: 1,
-        title: "EXPRIMER",
-        image: "https://picsum.photos/id/26/800/600",
-        tags: ["PHP", "JAVASCRIPT", "MYSQL"],
-        date: "Mars 2026 (2 semaines)",
-        contexte: "Conception et développement complet d'un réseau social dédié à la musique.",
-        features: [
-            "Fil d'actualité personnalisé",
-            "Système de messagerie instantanée",
-            "Gestion de contenu multimédia"
-        ],
-        link: "cv.pdf"
-    },
-    {
-        id: 2,
-        title: "ENTREPRENDRE",
-        image: "https://picsum.photos/id/13/800/600",
-        tags: ["Node.JS", "WebAssembly", "Socket.io"],
-        date: "Janvier 2026 (3 semaines)",
-        contexte: "Jeu multijoueur asymétrique avec des mécaniques innovantes.",
-        features: [
-            "Matchmaking en temps réel",
-            "Chat vocal intégré",
-            "Système de classement"
-        ],
-        link: "cv.pdf"
-    },
-    {
-        id: 3,
-        title: "COMPRENDRE",
-        image: "https://picsum.photos/id/0/800/600",
-        tags: ["React", "Firebase", "Tailwind"],
-        date: "Novembre 2025 (4 semaines)",
-        contexte: "Application éducative interactive pour l'apprentissage des maths.",
-        features: [
-            "Exercices personnalisés",
-            "Suivi de progression",
-            "Mode hors ligne"
-        ],
-        link: "cv.pdf"
-    },
-    {
-        id: 4,
-        title: "CONCEVOIR",
-        image: "https://picsum.photos/id/29/800/600",
-        tags: ["Figma", "Adobe XD", "UI/UX"],
-        date: "Septembre 2025 (2 semaines)",
-        contexte: "Design UI/UX professionnel pour une application bancaire.",
-        features: [
-            "Design system complet",
-            "Prototypage interactif",
-            "Tests utilisateurs"
-        ],
-        link: "cv.pdf"
-    }
+  // ── MODAL 1 ──────────────────────────────────────────
+  {
+    id: 1,
+    title: "ROLL UP IUT",
+    image: "images/projets/1.webp",
+    tags: ["PHP", "JAVASCRIPT", "MYSQL"],
+    date: "Mars 2026 (2 semaines)",
+    contexte:
+      "Conception et développement complet d'un réseau social dédié à la musique.",
+    features: [
+      "Fil d'actualité personnalisé",
+      "Système de messagerie instantanée",
+      "Gestion de contenu multimédia",
+    ],
+    link: "cv.pdf",
+  },
+  {
+    id: 2,
+    title: "BLOK",
+    image: "images/projets/2_1.webp",
+    tags: ["Node.JS", "WebAssembly", "Socket.io"],
+    date: "Janvier 2026 (3 semaines)",
+    contexte: "Jeu multijoueur asymétrique avec des mécaniques innovantes.",
+    features: [
+      "Matchmaking en temps réel",
+      "Chat vocal intégré",
+      "Système de classement",
+    ],
+    link: "cv.pdf",
+  },
+
+  {
+    id: 3,
+    title: "SAE 4 CREA.02",
+    image: "images/projets/3.webp",
+    tags: ["Figma", "Adobe XD", "UI/UX"],
+    date: "Juillet 2025 (2 semaines)",
+    contexte: "Design UI/UX professionnel pour une application bancaire.",
+    features: [
+      "Design system complet",
+      "Prototypage interactif",
+      "Tests utilisateurs",
+    ],
+    link: "cv.pdf",
+  },
+
+  // ── MODAL 2 ──────────────────────────────────────────
+  {
+    id: 4,
+    title: "PPP",
+    image: "images/projets/4.webp",
+    tags: ["Canva"],
+    date: "Juillet 2025 (2 semaines)",
+    contexte: "Design UI/UX professionnel pour une application bancaire.",
+    features: [
+      "Design system complet",
+      "Prototypage interactif",
+      "Tests utilisateurs",
+    ],
+    link: "cv.pdf",
+  },
+  {
+    id: 5,
+    title: "BMC",
+    image: "images/projets/5.webp",
+    tags: ["Figma", "Adobe XD", "UI/UX"],
+    date: "Juillet 2025 (2 semaines)",
+    contexte: "Design UI/UX professionnel pour une application bancaire.",
+    features: [
+      "Design system complet",
+      "Prototypage interactif",
+      "Tests utilisateurs",
+    ],
+    link: "cv.pdf",
+  },
+
+  // index 2 — carte COMPRENDRE
+  {
+    id: 7,
+    title: "COART",
+    image: "images/projets/7.webp",
+    tags: ["À compléter"],
+    date: "À compléter",
+    contexte: "À compléter.",
+    features: ["À compléter", "À compléter", "À compléter"],
+    link: "cv.pdf",
+  },
+  {
+    id: 8,
+    title: "CAMPAGNE CROWDFUNDING",
+    image: "images/projets/8.webp",
+    tags: ["À compléter"],
+    date: "À compléter",
+    contexte: "À compléter.",
+    features: ["À compléter", "À compléter", "À compléter"],
+    link: "cv.pdf",
+  },
+  // index 5 — carte CONCEVOIR
+  {
+    id: 9,
+    title: "CARATUNE",
+    image: "images/projets/12.webp",
+    tags: ["Adobe Photoshop", "Adobe Illustrator"],
+    date: "Septembre 2025 (2 semaines)",
+    contexte: "Design UI/UX professionnel pour une application bancaire.",
+    features: [
+      "Design system complet",
+      "Prototypage interactif",
+      "Tests utilisateurs",
+    ],
+    link: "cv.pdf",
+  },
+  // index 6 — carte CONCEVOIR (suite)
+  {
+    id: 10,
+    title: "PUB CHANEL",
+    image: "images/projets/9.webp",
+    tags: ["À compléter"],
+    date: "À compléter",
+    contexte: "À compléter.",
+    features: ["À compléter", "À compléter", "À compléter"],
+    link: "cv.pdf",
+  },
+  // index 7 — carte CONCEVOIR (suite)
+  {
+    id: 11,
+    title: "REFONTE EA",
+    image: "images/projets/5.png",
+    tags: ["À compléter"],
+    date: "À compléter",
+    contexte: "À compléter.",
+    features: ["À compléter", "À compléter", "À compléter"],
+    link: "cv.pdf",
+  },
+
+  // index 11 — carte DÉVELOPPER
+  {
+    id: 12,
+    title: "PORTFOLIO 2024/2025/2026",
+    image: "images/projets/11.webp",
+    tags: ["À compléter"],
+    date: "À compléter",
+    contexte: "À compléter.",
+    features: ["À compléter", "À compléter", "À compléter"],
+    link: "cv.pdf",
+  },
 ];
 
-
-let currentProjectIndex = 0;
+const modalConfigs = [
+    { modalId: 'modalProjet1', prevId: 'prevProject',  nextId: 'nextProject',  imageId: 'modalImage',  contentId: 'modalContent',  minIdx: 0, maxIdx: 2  }, // EXPRIMER (ROLL UP IUT → BLOK → COMPRENDRE)
+    { modalId: 'modalProjet2', prevId: 'prevProject2', nextId: 'nextProject2', imageId: 'modalImage2', contentId: 'modalContent2', minIdx: 8, maxIdx: 9   }, // ENTREPRENDRE (PPP → BMC)
+    { modalId: 'modalProjet3', prevId: 'prevProject3', nextId: 'nextProject3', imageId: 'modalImage3', contentId: 'modalContent3', minIdx: 3, maxIdx: 4   }, // COMPRENDRE (COART → MME CROWDFUNDING)
+    { modalId: 'modalProjet4', prevId: 'prevProject4', nextId: 'nextProject4', imageId: 'modalImage4', contentId: 'modalContent4', minIdx: 5, maxIdx: 6   }, // CONCEVOIR (CARATUNE → PUB CHANEL)
+    { modalId: 'modalProjet5', prevId: 'prevProject5', nextId: 'nextProject5', imageId: 'modalImage5', contentId: 'modalContent5', minIdx: 10, maxIdx: 11 }, // DÉVELOPPER (SAE 4 CREA.02 → PORTFOLIO)
+];
+const modalState = {};
 
 function initProjectSlider() {
-    const modal = document.getElementById('modalProjet1');
-    if (!modal) return;
-    
-    createDots();
-    displayProject(0);
-    
-    const nextBtn = document.getElementById('nextProject');
-    const prevBtn = document.getElementById('prevProject');
-    
-    if (nextBtn) nextBtn.addEventListener('click', nextProject);
-    if (prevBtn) prevBtn.addEventListener('click', prevProject);
-    
-    modal.addEventListener('show.bs.modal', () => {
-        currentProjectIndex = 0;
-        displayProject(0);
+    modalConfigs.forEach(cfg => {
+        const modal = document.getElementById(cfg.modalId);
+        if (!modal) return;
+
+        modalState[cfg.modalId] = cfg.minIdx;
+        modalState[cfg.modalId + '_min'] = cfg.minIdx;
+        modalState[cfg.modalId + '_max'] = cfg.maxIdx;
+
+        const prevBtn = document.getElementById(cfg.prevId);
+        const nextBtn = document.getElementById(cfg.nextId);
+
+        if (prevBtn) prevBtn.addEventListener('click', () => {
+            const min = modalState[cfg.modalId + '_min'];
+            if (modalState[cfg.modalId] > min) {
+                modalState[cfg.modalId]--;
+                displayProject(modalState[cfg.modalId], cfg);
+            }
+        });
+        if (nextBtn) nextBtn.addEventListener('click', () => {
+            const max = modalState[cfg.modalId + '_max'];
+            if (modalState[cfg.modalId] < max) {
+                modalState[cfg.modalId]++;
+                displayProject(modalState[cfg.modalId], cfg);
+            }
+        });
+
+        modal.addEventListener('show.bs.modal', (event) => {
+            const trigger = event.relatedTarget;
+            const index = trigger ? parseInt(trigger.dataset.projectIndex ?? cfg.minIdx) : cfg.minIdx;
+            const min = trigger?.dataset.modalMin !== undefined ? parseInt(trigger.dataset.modalMin) : cfg.minIdx;
+            const max = trigger?.dataset.modalMax !== undefined ? parseInt(trigger.dataset.modalMax) : cfg.maxIdx;
+
+            modalState[cfg.modalId] = index;
+            modalState[cfg.modalId + '_min'] = min;
+            modalState[cfg.modalId + '_max'] = max;
+
+            displayProject(index, cfg);
+        });
     });
 }
 
-function displayProject(index) {
+function displayProject(index, cfg) {
     const project = projectsData[index];
     if (!project) return;
-    
-    const modalImage = document.getElementById('modalImage');
-    if (modalImage) {
-        modalImage.style.backgroundImage = `url('${project.image}')`;
-    }
-    
-    const modalContent = document.getElementById('modalContent');
+
+    const min = modalState[cfg.modalId + '_min'] ?? cfg.minIdx;
+    const max = modalState[cfg.modalId + '_max'] ?? cfg.maxIdx;
+
+    const modalImage = document.getElementById(cfg.imageId);
+    if (modalImage) modalImage.style.backgroundImage = `url('${project.image}')`;
+
+    const modalContent = document.getElementById(cfg.contentId);
     if (modalContent) {
         modalContent.innerHTML = `
             <h2 class="project-title dmp">${project.title}</h2>
@@ -257,7 +538,7 @@ function displayProject(index) {
                 ${project.tags.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
             </div>
             <a href="${project.link}" class="btn link-btn px-4 py-2" style="background: linear-gradient(45deg, #ff4500, #e82b2b, #ff6b6b);">
-                VOIR LE PROJET 
+                VOIR LE PROJET
                 <svg class="custom-icon w-5 h-5 ms-2" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                     <polyline points="15 3 21 3 21 9"></polyline>
@@ -281,62 +562,16 @@ function displayProject(index) {
             </div>
         `;
     }
-    
-    updateDots(index);
-    
-    const prevBtn = document.getElementById('prevProject');
-    const nextBtn = document.getElementById('nextProject');
-    
+
+    const prevBtn = document.getElementById(cfg.prevId);
+    const nextBtn = document.getElementById(cfg.nextId);
     if (prevBtn) {
-        prevBtn.style.opacity = index === 0 ? '0.3' : '1';
-        prevBtn.style.cursor = index === 0 ? 'not-allowed' : 'pointer';
+        prevBtn.style.opacity = index === min ? '0.3' : '1';
+        prevBtn.style.cursor = index === min ? 'not-allowed' : 'pointer';
     }
-    
     if (nextBtn) {
-        nextBtn.style.opacity = index === projectsData.length - 1 ? '0.3' : '1';
-        nextBtn.style.cursor = index === projectsData.length - 1 ? 'not-allowed' : 'pointer';
-    }
-}
-
-function createDots() {
-    const dotsContainer = document.getElementById('sliderDots');
-    if (!dotsContainer) return;
-    
-    dotsContainer.innerHTML = '';
-    projectsData.forEach((_, index) => {
-        const dot = document.createElement('div');
-        dot.classList.add('slider-dot');
-        if (index === currentProjectIndex) dot.classList.add('active');
-        dot.addEventListener('click', () => {
-            currentProjectIndex = index;
-            displayProject(currentProjectIndex);
-        });
-        dotsContainer.appendChild(dot);
-    });
-}
-
-function updateDots(activeIndex) {
-    const dots = document.querySelectorAll('.slider-dot');
-    dots.forEach((dot, index) => {
-        if (index === activeIndex) {
-            dot.classList.add('active');
-        } else {
-            dot.classList.remove('active');
-        }
-    });
-}
-
-function nextProject() {
-    if (currentProjectIndex < projectsData.length - 1) {
-        currentProjectIndex++;
-        displayProject(currentProjectIndex);
-    }
-}
-
-function prevProject() {
-    if (currentProjectIndex > 0) {
-        currentProjectIndex--;
-        displayProject(currentProjectIndex);
+        nextBtn.style.opacity = index === max ? '0.3' : '1';
+        nextBtn.style.cursor = index === max ? 'not-allowed' : 'pointer';
     }
 }
 
