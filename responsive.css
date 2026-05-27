@@ -8,7 +8,7 @@
     .circle {
         visibility: hidden !important;
     }
-    
+
     /* Hero */
     .hero {
         text-align: center;
@@ -152,12 +152,138 @@
 
 }
 
+/* ── Modales ai-modal responsive ── */
+@media (max-width: 767px) {
+
+    /* Modale plein écran sur mobile */
+    .modal-dialog.modal-xl {
+        max-width: 100% !important;
+        margin: 0 !important;
+        height: 100%;
+    }
+    .modal-dialog.modal-xl .modal-content {
+        height: 100%;
+        border-radius: 0 !important;
+    }
+
+    /* Header compact */
+    .ai-modal-header {
+        padding: 10px 14px !important;
+    }
+    .ai-proj-logo {
+        width: 32px !important;
+        height: 32px !important;
+    }
+    .ai-proj-cat {
+        font-size: 0.5rem !important;
+        letter-spacing: 0.1em !important;
+    }
+    .ai-proj-name {
+        font-size: 0.82rem !important;
+    }
+    .ai-close-btn {
+        width: 34px !important;
+        height: 34px !important;
+    }
+
+    /* Body padding */
+    .ai-modal-body {
+        padding: 16px !important;
+    }
+
+    /* Titre principal */
+    .ai-title {
+        font-size: 1.6rem !important;
+        margin-bottom: 14px !important;
+    }
+    .ai-meta {
+        font-size: 0.55rem !important;
+    }
+    .ai-desc {
+        font-size: 0.82rem !important;
+    }
+
+    /* Section : badge + texte + bouton → wrap propre */
+    .ai-section .d-flex.align-items-start {
+        flex-wrap: wrap;
+    }
+    .ai-section .d-flex.align-items-start .flex-grow-1 {
+        flex: 1 1 0;
+        min-width: 0;
+    }
+    .ai-social-btn {
+        margin-left: 0 !important;
+        margin-top: 12px !important;
+        margin-bottom: 20px !important;
+        width: 100% !important;
+        justify-content: center !important;
+    }
+    .ai-section-title {
+        font-size: 1rem !important;
+    }
+    .ai-section-sub {
+        font-size: 0.78rem !important;
+    }
+
+    /* Gallery cards : override les min-height inline */
+    .ai-gcard {
+        min-height: 200px !important;
+    }
+
+    /* Supprimer le gap-3 sur petits écrans dans les colonnes gcard */
+    .ai-section .row {
+        --bs-gutter-x: 0.5rem !important;
+        --bs-gutter-y: 0.5rem !important;
+    }
+}
+
+/* ── Section Projets responsive ── */
+@media (max-width: 991px) {
+    .pcard {
+        min-height: 260px !important;
+    }
+    .pcard-wide {
+        min-height: 220px !important;
+    }
+    .pcard-title {
+        font-size: 1.4rem !important;
+    }
+    .pcard-desc {
+        display: none;
+    }
+    .filter-container {
+        gap: 8px;
+    }
+}
+
+@media (max-width: 575px) {
+    .pcard {
+        min-height: 200px !important;
+    }
+    .pcard-wide {
+        min-height: 160px !important;
+    }
+    .pcard-title {
+        font-size: 1.15rem !important;
+    }
+    .pcard-tags {
+        font-size: 0.55rem !important;
+    }
+    .pcard-num {
+        font-size: 0.65rem !important;
+    }
+    .pcard-content {
+        padding: 14px !important;
+    }
+}
+
 /* Mobiles uniquement (max-width: 768px) */
 @media (max-width: 768px) {
+
     .circle {
         visibility: hidden !important;
     }
-    
+
     .hero-img img {
         max-width: 300px;
     }
@@ -386,8 +512,8 @@
 @media (min-width: 768px) and (max-width: 1366px) {
     .circle {
         visibility: hidden !important;
-    }
-    
+        }
+
     .hero-img img {
         max-width: 480px;
     }
