@@ -870,7 +870,12 @@ ul li::before {
 }
 .ai-close-btn:hover { background: #ff4500; border-color: #ff4500; transform: rotate(90deg); }
 
-.ai-modal-body { background: #0d0d0d; }
+.ai-modal-body {
+  background: #0d0d0d;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
 
 .ai-social-btn {
   display: inline-flex;
@@ -1131,6 +1136,9 @@ ul li::before {
     
         .ai-modal-body {
             background: #0d0d0d;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
         }
     
         .ai-social-btn {
