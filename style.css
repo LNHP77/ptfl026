@@ -957,6 +957,14 @@ ul li::before {
   color: rgba(255,255,255,0.8) !important;
 }
 
+/* Fix scroll mobile dans les modales : empêche iOS d'hésiter entre tap et scroll sur les cartes */
+.modal .ai-gcard,
+.modal .ai-gcard-overlay,
+.modal .ai-modal-body,
+.modal .ai-section {
+    touch-action: pan-y !important;
+}
+
 /* ── Lightbox ── */
 .lightbox-overlay {
   display: none;
