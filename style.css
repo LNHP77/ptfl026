@@ -1732,3 +1732,332 @@ ul li::before {
     text-decoration: none;
     transition: all 0.3s ease;
 }
+
+.footer-links a:hover {
+    color: #ff4500;
+    padding-left: 5px;
+}
+
+.footer-contact {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-contact li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.footer-contact li span:first-child {
+    font-size: 1.2rem;
+}
+
+.footer-contact a {
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-contact a:hover {
+    color: #ff4500;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-bottom p {
+    transition: all 0.3s ease;
+    font-size: 12px !important;
+    color: rgba(160, 154, 154, 0.6) !important;
+    font-family: a;
+}
+
+.footer-bottom p:hover {
+    font-size: 13px !important;
+    color: var(--primary-color) !important;
+}
+
+.footer-bottom .highlight {
+    color: #ff4500;
+    font-weight: 600;
+}
+
+/* MODALES MENTIONS LÉGALES */
+
+/*
+#mentionsModal .modal-dialog {
+    max-width: 700px;
+    min-width: 650px;
+    margin: 1.75rem auto;
+}
+
+/* Scroll interne 
+#mentionsModal .modal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 1.5rem;
+}
+
+/* Personnalisation du scrollbar */
+
+/*
+#mentionsModal .modal-body::-webkit-scrollbar {
+    width: 5px;
+}
+
+#mentionsModal .modal-body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+#mentionsModal .modal-body::-webkit-scrollbar-thumb {
+    background: #ff4500;
+    border-radius: 10px;
+}
+
+#mentionsModal .modal-body::-webkit-scrollbar-thumb:hover {
+    background: #ff6b6b;
+}
+
+/* Ajustement du header et footer */
+#mentionsModal .modal-header {
+    padding: 1rem 1.5rem;
+    flex-shrink: 0;
+}
+
+#mentionsModal .modal-footer {
+    padding: 1rem 1.5rem;
+    flex-shrink: 0;
+}
+
+#mentionsModal .modal-content {
+    max-height: 80vh;
+    overflow: hidden;
+}
+
+/* Compactage du contenu */
+#mentionsModal .legal-section {
+    margin-bottom: 1.5rem;
+}
+
+#mentionsModal .legal-section h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+#mentionsModal .legal-section p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+#mentionsModal .modal-title {
+    font-size: 1.3rem;
+}
+
+
+
+.modal-legal .modal-content {
+    background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 40px;
+}
+
+.modal-legal .modal-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 30px;
+    justify-content: space-between;
+}
+
+.modal-legal .modal-title {
+    color: white;
+    font-family: URW;
+    font-weight: 700;
+    background: linear-gradient(135deg, #f0680d, #ff4500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.btn-close-legal {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.btn-close-legal:hover {
+    background: #ff4500;
+    transform: rotate(180deg);
+}
+
+.modal-legal .modal-body {
+    padding: 30px;
+}
+
+.legal-section {
+    margin-bottom: 25px;
+}
+
+.legal-section h4 {
+    color: #ff4500;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: h1;
+}
+
+.legal-section p {
+    color: #8c8a89 !important;
+    line-height: 1.6 !important;
+    font-size: 14px !important;
+}
+
+
+.modal-legal .modal-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 30px;
+}
+
+.btn-legal-close {
+    background: transparent;
+    border: 2px solid #ff4500;
+    color: #ff4500;
+    padding: 8px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-legal-close:hover {
+    background: #ff4500;
+    color: white;
+}
+
+
+/* ==================== FILTRES PROJETS ==================== */
+.project-filter-item.filter-hidden {
+    display: none;
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.project-filter-item.filter-appear {
+    animation: cardAppear 0.4s cubic-bezier(.215, .61, .355, 1) forwards;
+}
+
+/* ==================== ANIMATIONS AU SCROLL ==================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(.215, .61, .355, 1), transform 0.7s cubic-bezier(.215, .61, .355, 1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==================== ANIMATION TEXTE HERO ==================== */
+.hero-letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: letterReveal 0.5s cubic-bezier(.215, .61, .355, 1) forwards;
+    color: inherit !important;
+    font-family: inherit !important;
+}
+
+@keyframes letterReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================== PDF LIGHTBOX ==================== */
+#pdf-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#pdf-lightbox.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.pdf-lightbox-frame {
+    width: 90vw;
+    height: 88vh;
+    border: none;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.pdf-lightbox-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #fff;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1;
+    line-height: 1;
+    opacity: 0.85;
+    transition: opacity 0.2s, background 0.25s, border-color 0.25s, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pdf-lightbox-close:hover {
+    opacity: 1;
+    background: #ff4500;
+    border-color: #ff4500;
+    transform: rotate(90deg);
+}
