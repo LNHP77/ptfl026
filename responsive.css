@@ -191,6 +191,12 @@
         padding: 16px !important;
     }
 
+    .ai-modal-body {
+  background: #0d0d0d;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
     /* Titre principal */
     .ai-title {
         font-size: 1.6rem !important;
