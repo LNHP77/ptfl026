@@ -156,11 +156,13 @@
 @media (max-width: 767px) {
 
     /* Modale plein écran sur mobile */
-    .modal-dialog.modal-xl {
-        max-width: 100% !important;
-        margin: 0 !important;
-        height: 100dvh;
+     .modal-dialog.modal-xl {
+        max-width: 92% !important;
+        margin: 3vh auto !important;
+        height: 90dvh !important;
+        align-self: center !important;
     }
+    
     .modal-dialog.modal-xl .modal-content {
         height: 100%;
         border-radius: 0 !important;
