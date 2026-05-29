@@ -307,22 +307,40 @@ function handleCursorOnModal() {
     
     let savedScrollY = 0;
 
+    // Bloque touchmove sur le fond, autorise à l'intérieur du modal-body
+    function lockBodyTouch(e) {
+        const scrollable = e.target.closest('.modal-body, .ai-modal-body');
+        if (!scrollable) {
+            e.preventDefault();
+            return;
+        }
+        // Bloquer aussi quand le contenu ne dépasse pas (évite un scroll fantôme)
+        if (scrollable.scrollHeight <= scrollable.clientHeight) {
+            e.preventDefault();
+        }
+    }
+
     modals.forEach(modal => {
         observer.observe(modal, { attributes: true });
 
         modal.addEventListener('show.bs.modal', () => {
             savedScrollY = window.scrollY;
+            setCursorVisibility(false);
+        });
+
+        // shown = Bootstrap a fini → on applique nos styles après lui
+        modal.addEventListener('shown.bs.modal', () => {
             document.body.style.position = 'fixed';
             document.body.style.top = `-${savedScrollY}px`;
             document.body.style.width = '100%';
-            document.body.style.overflowY = 'scroll';
-            setCursorVisibility(false);
+            document.addEventListener('touchmove', lockBodyTouch, { passive: false });
         });
+
         modal.addEventListener('hidden.bs.modal', () => {
             document.body.style.position = '';
             document.body.style.top = '';
             document.body.style.width = '';
-            document.body.style.overflowY = '';
+            document.removeEventListener('touchmove', lockBodyTouch);
             window.scrollTo({ top: savedScrollY, behavior: 'instant' });
             setCursorVisibility(true);
         });
