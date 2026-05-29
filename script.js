@@ -312,11 +312,19 @@ function handleCursorOnModal() {
 
         modal.addEventListener('show.bs.modal', () => {
             savedScrollY = window.scrollY;
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${savedScrollY}px`;
+            document.body.style.width = '100%';
+            document.body.style.overflowY = 'scroll';
             setCursorVisibility(false);
         });
         modal.addEventListener('hidden.bs.modal', () => {
-            setCursorVisibility(true);
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            document.body.style.overflowY = '';
             window.scrollTo({ top: savedScrollY, behavior: 'instant' });
+            setCursorVisibility(true);
         });
     });
 }
