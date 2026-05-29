@@ -47,6 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 10. Lightbox pour les ai-gcard
     initLightbox();
+
+    // 11. Lightbox PDF
+    initPdfLightbox();
 });
 
 // ==================== LIGHTBOX ====================
@@ -119,6 +122,7 @@ function initFilterButtons() {
             if (item.dataset.category === filter) {
                 item.classList.remove('filter-hidden');
                 item.classList.add('filter-appear');
+                item.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
                 item.addEventListener('animationend', () => item.classList.remove('filter-appear'), { once: true });
             } else {
                 item.classList.add('filter-hidden');
@@ -143,7 +147,7 @@ function initScrollAnimations() {
     const selectors = [
         '.card-custom',
         '.timeline-item',
-        '.project-card',
+        '.pcard',
         '.hero .col-lg-6',
         '.divider',
     ];
@@ -606,6 +610,44 @@ function checkContactVisibility() {
 window.addEventListener("scroll", checkContactVisibility);
 checkContactVisibility(); // Vérification initiale
 
+
+// ==================== PDF LIGHTBOX ====================
+function initPdfLightbox() {
+    const overlay = document.getElementById('pdf-lightbox');
+    if (!overlay) return;
+
+    const frame    = overlay.querySelector('.pdf-lightbox-frame');
+    const closeBtn = overlay.querySelector('.pdf-lightbox-close');
+    const cursorEl = document.querySelector('.cursor');
+
+    function openPdf(url) {
+        frame.src = url;
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        if (cursorEl) cursorEl.style.visibility = 'hidden';
+        document.body.style.cursor = 'auto';
+    }
+
+    function closePdf() {
+        overlay.classList.remove('active');
+        frame.src = '';
+        document.body.style.overflow = '';
+        if (cursorEl) cursorEl.style.visibility = 'visible';
+        document.body.style.cursor = 'none';
+    }
+
+    document.addEventListener('click', e => {
+        const btn = e.target.closest('[data-pdf]');
+        if (btn) {
+            e.preventDefault();
+            openPdf(btn.dataset.pdf);
+        }
+    });
+
+    closeBtn.addEventListener('click', closePdf);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closePdf(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closePdf(); });
+}
 
 // Gestion des préférences cookies
 document.addEventListener('DOMContentLoaded', function() {
