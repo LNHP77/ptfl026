@@ -50,6 +50,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 11. Lightbox PDF
     initPdfLightbox();
+
+    // 12. Fix scroll mobile : style inline sur chaque modal-body
+    //     (équivalent à écrire l'attribut style directement dans le HTML)
+    document.querySelectorAll('.ai-modal-body').forEach(el => {
+        el.style.maxHeight = 'calc(100dvh - 60px)';
+        el.style.overflowY = 'scroll';
+        el.style.webkitOverflowScrolling = 'touch';
+        el.style.overscrollBehavior = 'contain';
+    });
 });
 
 // ==================== LIGHTBOX ====================
