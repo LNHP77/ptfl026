@@ -649,7 +649,7 @@ ul li::before {
 
 /* SECTION PROJETS */
 
-
+/*
          .pcard {
              position: relative;
              border-radius: 14px;
@@ -811,6 +811,8 @@ ul li::before {
 
 
             /* ── Modales Projets ── */
+
+/*
 .ai-modal-content {
   background: #0d0d0d;
   color: #fff;
@@ -965,6 +967,8 @@ ul li::before {
 }
 
 /* ── Lightbox ── */
+
+/*
 .lightbox-overlay {
   display: none;
   position: fixed;
@@ -1011,6 +1015,7 @@ ul li::before {
 .ai-gcard:not(.ai-gcard-stat) { cursor: zoom-in; }
 
 /* Gallery cards */
+/*
 .ai-gcard {
   position: relative;
   border-radius: 12px;
