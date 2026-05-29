@@ -87,7 +87,7 @@ function initLightbox() {
 
     document.addEventListener('click', e => {
         const card = e.target.closest('.ai-gcard:not(.ai-gcard-stat)');
-        if (card && !card.closest('.modal')) {
+        if (card) {
             const bg = card.style.backgroundImage;
             const match = bg.match(/url\(["']?(.+?)["']?\)/);
             if (match) open(match[1]);
