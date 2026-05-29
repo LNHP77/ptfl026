@@ -60,13 +60,14 @@ body.light-mode {
     --sub-text: #a0430a;
 
 }
+    /*
 
 html,
 body {
     height: 100%;
     width: 100%;
     background: var(--bg-color);
-    /* Garder un seul !important ici pour lier à la variable */
+  
     color: var(--text-color);
     transition: background 0.4s ease, color 0.4s ease;
 }
@@ -1080,7 +1081,7 @@ ul li::before {
 
         /* ── Modales Projets ── */
 
-         /*
+     
         .ai-modal-content {
             background: #0d0d0d;
             color: #fff;
