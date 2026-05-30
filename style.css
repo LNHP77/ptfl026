@@ -1401,23 +1401,16 @@ ul li::before {
 
 
 
-
 /* ==================== FILTRES PROJETS ==================== */
 .project-filter-item.filter-hidden {
     display: none;
 }
 
 @keyframes cardAppear {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
+
 
 .project-filter-item.filter-appear {
     animation: cardAppear 0.4s cubic-bezier(.215, .61, .355, 1) forwards;
