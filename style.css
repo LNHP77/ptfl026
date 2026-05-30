@@ -1941,3 +1941,102 @@ ul li::before {
     background: #ff4500;
     color: white;
 }
+
+
+
+
+/* ==================== ANIMATIONS AU SCROLL ==================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(.215, .61, .355, 1), transform 0.7s cubic-bezier(.215, .61, .355, 1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==================== ANIMATION TEXTE HERO ==================== */
+.hero-letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: letterReveal 0.5s cubic-bezier(.215, .61, .355, 1) forwards;
+    color: inherit !important;
+    font-family: inherit !important;
+}
+
+@keyframes letterReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================== PDF LIGHTBOX ==================== */
+#pdf-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#pdf-lightbox.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.pdf-lightbox-frame {
+    width: 90vw;
+    height: 88vh;
+    border: none;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.pdf-lightbox-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #fff;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1;
+    line-height: 1;
+    opacity: 0.85;
+    transition: opacity 0.2s, background 0.25s, border-color 0.25s, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pdf-lightbox-close:hover {
+    opacity: 1;
+    background: #ff4500;
+    border-color: #ff4500;
+    transform: rotate(90deg);
+}
