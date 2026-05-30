@@ -1809,14 +1809,14 @@ ul li::before {
 }
 
 /* Scroll interne */
-#mentionsModal .modal-body {
+/* #mentionsModal .modal-body {
     max-height: 60vh;
     overflow-y: auto;
     padding: 1.5rem;
 }
 
 /* Personnalisation du scrollbar */
-#mentionsModal .modal-body::-webkit-scrollbar {
+/* #mentionsModal .modal-body::-webkit-scrollbar {
     width: 5px;
 }
 
@@ -1835,7 +1835,7 @@ ul li::before {
 }
 
 /* Ajustement du header et footer */
-#mentionsModal .modal-header {
+/* #mentionsModal .modal-header {
     padding: 1rem 1.5rem;
     flex-shrink: 0;
 }
