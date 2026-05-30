@@ -1603,7 +1603,6 @@ ul li::before {
     left: 30px;
     right: 30px;
     background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
