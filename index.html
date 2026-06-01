@@ -52,33 +52,21 @@
 
       <!-- Section Intro -->
    <section class="video-hero position-relative" id="home">
+
   <video autoplay muted loop playsinline class="video-bg">
-    <source src="fusen.mp4" type="video/mp4">
+    <source media="(max-width: 768px)" src="introptflresponsive.mp4" type="video/mp4">
+    <source src="introptfl2.mp4" type="video/mp4">
     Ton navigateur ne supporte pas la vidéo.
   </video>
-  <script>
-const video = document.querySelector(".video-bg");
 
-function adjustVideo() {
-  if (window.innerWidth < 768) {
-    video.style.objectPosition = "60% center";
-  } else {
-    video.style.objectPosition = "center";
-  }
-}
-
-window.addEventListener("load", adjustVideo);
-window.addEventListener("resize", adjustVideo);
-</script>
-  
   <div class="overlay"></div>
 
-  
+<!--   
   <div class="container content text-center text-white">
     <h1 class="fw-bold">PORTFOLIO</h1><br>
     <h6 class="mt-3">PAVIUS LÉHANN - 2026</h6>
   </div>
-
+          -->
 </section> 
 
       <script>
