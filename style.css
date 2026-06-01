@@ -50,6 +50,7 @@
     --text-color: #ffffff;
     --card-bg: rgba(255, 255, 255, 0.02);
     --sub-text: #c6c9d8b9;
+    --nav-text: #ffffff;
 }
 
 body.light-mode {
@@ -59,6 +60,7 @@ body.light-mode {
     --text-color: #111111;
     --card-bg: linear-gradient(#e4dddd, #ffffff);
     --sub-text: #a0430a;
+    --nav-text: #094fe6;
 
 }
 
@@ -239,7 +241,7 @@ button {
 }
 
 .navbar .nav-link {
-    color: white;
+    color: var(--primary-color) !important;
 }
 
 .navbar a {
@@ -260,7 +262,7 @@ button {
 }
 
 .nav-link {
-    color: var(--text-color);
+    color: var(--primary-color);
     font-weight: 500;
     transition: 0.3s;
     position: relative;
@@ -268,7 +270,7 @@ button {
 
 .nav-link:hover,
 .nav-link.active {
-    color: var(--primary-color) !important;
+    color: var(--nav-text) !important;
 }
 
 .nav-link::after {
@@ -278,7 +280,7 @@ button {
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--primary-color);
+    background: var(--nav-text);
     transition: 0.3s;
 }
 
