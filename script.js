@@ -1,3 +1,13 @@
+// ==================== VIDEO HERO ====================
+(function () {
+    const video = document.getElementById('hero-video');
+    if (!video) return;
+    video.src = window.matchMedia('(max-width: 991px)').matches
+        ? 'introptflresponsive.mp4'
+        : 'ii.mp4';
+    video.load();
+})();
+
 // ==================== INITIALISATION PRINCIPALE ====================
 document.addEventListener("DOMContentLoaded", () => {
     // 1. Thème (checkbox)
