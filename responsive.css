@@ -12,6 +12,7 @@
     /* Hero */
     .hero {
         text-align: center;
+        padding-top: 60px;
     }
 
     .hero-img img {
@@ -150,11 +151,33 @@
     gap: 30px;
 }
 
+    /* Section Projets */
+    .pcard {
+        min-height: 260px !important;
+    }
+    .pcard-wide {
+        min-height: 220px !important;
+    }
+    .pcard-title {
+        font-size: 1.4rem !important;
+    }
+    .pcard-desc {
+        display: none;
+    }
+    .filter-container {
+        gap: 8px;
+    }
+
 }
 
 /* ── Modales ai-modal responsive ── */
 @media (max-width: 767px) {
 
+    /* Hero */
+        .hero {
+            text-align: center;
+            padding-top: 60px;
+        }
 
     /* Modale quasi plein écran sur mobile */
     .modal-dialog.modal-xl {
@@ -252,18 +275,6 @@
         --bs-gutter-y: 0.5rem !important;
     }
 
-    /* Scrollbar de la modale principale */
-    .modal-dialog.modal-xl .modal-body::-webkit-scrollbar {
-        width: 3px;
-    }
-    .modal-dialog.modal-xl .modal-body::-webkit-scrollbar-track {
-        background: transparent;
-    }
-    .modal-dialog.modal-xl .modal-body::-webkit-scrollbar-thumb {
-        background: #ff4500;
-        border-radius: 10px;
-    }
-
         /* ==================== FILTRES PROJETS ==================== */
         .project-filter-item.filter-hidden {
             display: none;
@@ -280,24 +291,6 @@
         }
 }
 
-/* ── Section Projets responsive ── */
-@media (max-width: 991px) {
-    .pcard {
-        min-height: 260px !important;
-    }
-    .pcard-wide {
-        min-height: 220px !important;
-    }
-    .pcard-title {
-        font-size: 1.4rem !important;
-    }
-    .pcard-desc {
-        display: none;
-    }
-    .filter-container {
-        gap: 8px;
-    }
-}
 
 @media (max-width: 575px) {
     .pcard {
@@ -323,10 +316,6 @@
 /* Mobiles uniquement (max-width: 768px) */
 @media (max-width: 768px) {
 
-    .circle {
-        visibility: hidden !important;
-    }
-
     .hero-img img {
         max-width: 300px;
     }
@@ -340,11 +329,6 @@
         width: auto;
         height: 100%;
         min-width: 100%;
-    }
-
-    .close-btn {
-        top: 10px;
-        right: 10px;
     }
 
     .contact-section {
