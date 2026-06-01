@@ -51,6 +51,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // 11. Lightbox PDF
     initPdfLightbox();
 
+    // 12. Barres de progression compétences
+    initSkillBars();
+
+    // 13. Timeline apparition au scroll
+    initTimeline();
+
+    // 14. Pcards apparition au scroll
+    initPcards();
+
+    // 15. Texte about apparition au scroll
+    initScrollReveal('.reveal');
+
     // 12. Fix scroll mobile : style inline sur chaque modal-body
     //     (équivalent à écrire l'attribut style directement dans le HTML)
     document.querySelectorAll('.ai-modal-body').forEach(el => {
@@ -60,6 +72,58 @@ document.addEventListener("DOMContentLoaded", () => {
         el.style.overscrollBehavior = 'contain';
     });
 });
+
+// ==================== SCROLL REVEAL ====================
+function initScrollReveal(selector, threshold = 0.15) {
+    const items = document.querySelectorAll(selector);
+    if (!items.length) return;
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold });
+
+    items.forEach(item => {
+        if (item.getBoundingClientRect().top < window.innerHeight) {
+            // Déjà dans le viewport au chargement : visible instantanément, sans animation
+            item.style.transition = 'none';
+            item.classList.add('visible');
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+                item.style.transition = '';
+            }));
+        } else {
+            observer.observe(item);
+        }
+    });
+}
+
+function initTimeline() { initScrollReveal('.timeline-item'); }
+function initPcards()   { initScrollReveal('.pcard', 0.1); }
+
+// ==================== SKILL CIRCLES ====================
+function initSkillBars() {
+    const fills = document.querySelectorAll('.skill-fill-circle');
+    if (!fills.length) return;
+
+    const circumference = 2 * Math.PI * 42; // 263.9
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const offset = circumference * (1 - parseFloat(el.dataset.width) / 100);
+                el.style.strokeDashoffset = offset;
+                observer.unobserve(el);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    fills.forEach(fill => observer.observe(fill));
+}
 
 // ==================== LIGHTBOX ====================
 function initLightbox() {
