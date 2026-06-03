@@ -6,6 +6,7 @@
         ? 'introptflresponsive.mp4'
         : 'ii.mp4';
     video.load();
+    video.play().catch(() => {});
 })();
 
 // ==================== INITIALISATION PRINCIPALE ====================
