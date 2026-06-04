@@ -5,8 +5,11 @@
     video.src = window.matchMedia('(max-width: 991px)').matches
         ? 'introptflresponsive.mp4'
         : 'ii.mp4';
+    video.muted = true;
     video.load();
-    video.play().catch(() => {});
+    video.addEventListener('canplay', function () {
+        video.play().catch(() => {});
+    }, { once: true });
 })();
 
 // ==================== INITIALISATION PRINCIPALE ====================
