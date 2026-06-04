@@ -345,10 +345,9 @@ button {
 
 /* SECTION VIDEO */
 .video-hero {
+    position: relative;
     height: 100vh;
     overflow: hidden;
-
-
 }
 
 /* VIDEO */
