@@ -12,6 +12,8 @@
     }, { once: true });
 })();
 
+
+
 // ==================== INITIALISATION PRINCIPALE ====================
 document.addEventListener("DOMContentLoaded", () => {
     // 1. Thème (checkbox)
@@ -23,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 localStorage.setItem("theme", "light");
             } else {
                 document.body.classList.remove("light-mode");
+                
                 localStorage.setItem("theme", "dark");
             }
         };
@@ -77,6 +80,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // 15. Texte about apparition au scroll
     initScrollReveal('.reveal');
 
+    // 16. Ligne timeline upcoming fill au scroll
+    initTimelineFill();
+
     // 12. Fix scroll mobile : style inline sur chaque modal-body
     //     (équivalent à écrire l'attribut style directement dans le HTML)
     document.querySelectorAll('.ai-modal-body').forEach(el => {
@@ -117,6 +123,22 @@ function initScrollReveal(selector, threshold = 0.15) {
 
 function initTimeline() { initScrollReveal('.timeline-item'); }
 function initPcards()   { initScrollReveal('.pcard', 0.1); }
+
+// ==================== UPCOMING TIMELINE FILL ====================
+function initTimelineFill() {
+    const fill  = document.querySelector('.upcoming-line-fill');
+    const track = document.querySelector('.upcoming-line-track');
+    if (!fill || !track) return;
+
+    function update() {
+        const rect   = track.getBoundingClientRect();
+        const filled = Math.max(0, Math.min(track.offsetHeight, window.innerHeight / 2 - rect.top));
+        fill.style.height = filled + 'px';
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+}
 
 // ==================== SKILL CIRCLES ====================
 function initSkillBars() {
