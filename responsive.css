@@ -344,8 +344,9 @@
     }
 
     .upcoming-card {
-        flex: 0 0 100%;
-        margin-left: 0;
+        flex: 0 0 auto;
+        width: calc(100% - 32px);
+        margin-left: 32px;
         padding: 20px 16px;
     }
 
