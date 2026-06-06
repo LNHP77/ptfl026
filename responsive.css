@@ -38,6 +38,10 @@
         text-align: center;
     }
 
+    .video-hero {
+    position: relative;
+}
+
     /* Video hero */
     .video-hero h1 {
         font-size: 1.8rem;
@@ -291,6 +295,73 @@
         }
 }
 
+
+/* ==================== UPCOMING SECTION ==================== */
+
+/* Tablette (≤ 991px) */
+@media (max-width: 991px) {
+    .upcoming-item {
+        gap: 24px;
+        margin-bottom: 80px;
+    }
+
+    .upcoming-date {
+        width: 140px;
+        font-size: 1.8rem !important;
+    }
+
+    .upcoming-card {
+        flex: 1 1 0;
+        margin-left: 0;
+        padding: 28px 24px;
+    }
+}
+
+/* Mobile (≤ 767px) */
+@media (max-width: 767px) {
+    .upcoming-item {
+        flex-wrap: wrap;
+        gap: 10px 16px;
+        margin-bottom: 50px;
+        align-items: center;
+    }
+
+    .upcoming-dot-col {
+        width: 16px;
+        padding-top: 0;
+    }
+
+    .upcoming-dot {
+        width: 14px;
+        height: 14px;
+    }
+
+    .upcoming-date {
+        flex: 1;
+        width: auto;
+        font-size: 1.5rem !important;
+        padding-top: 0;
+    }
+
+    .upcoming-card {
+        flex: 0 0 100%;
+        margin-left: 0;
+        padding: 20px 16px;
+    }
+
+    .upcoming-title {
+        font-size: 1rem !important;
+        letter-spacing: 1px !important;
+    }
+
+    .upcoming-desc {
+        font-size: 0.9rem !important;
+    }
+
+    .upcoming-line-track {
+        left: 7px;
+    }
+}
 
 @media (max-width: 575px) {
     .pcard {
