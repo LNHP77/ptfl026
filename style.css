@@ -43,26 +43,44 @@
 }
 
 :root {
-    --primary-color: #d84c19;
+    --primary-color: #e8490f;
     --secundary-color: #070707;
-    --gradient-btn: linear-gradient(#d84c19, #e70f0f);
+    --gradient-btn: linear-gradient(#e8490f, #e70f0f);
     --bg-color: radial-gradient(#2b2a2a, #000000);
     --text-color: #ffffff;
-    --card-bg: rgba(255, 255, 255, 0.02);
     --sub-text: #c6c9d8b9;
     --nav-text: #ffffff;
     --gradient-timeline : linear-gradient(45deg, #d84c19, #ff6b6b);
+    --upcoming-timeline : rgba(255, 255, 255, 0.06);
+    --circle-border-timeline: rgba(255, 255, 255, 0.3);
+    --circle-timeline: #222222;
+
+    --upcoming-card: rgba(255, 255, 255, 0.015);
+    --upcoming-border-card: rgba(255, 255, 255, 0.06);
 }
 
 body.light-mode {
-    --primary-color: #a0430a;
-    --secundary-color: #f4eded;
-    --bg-color: radial-gradient(#e4dddd, #ffffff);
-    --text-color: #111111;
-    --card-bg: linear-gradient(#e4dddd, #ffffff);
-    --sub-text: #a0430a;
-    --nav-text: #094fe6;
+    --primary-color: #e8490f;
+    --secundary-color: #f5f5f5;
+    --bg-color: radial-gradient(#f5f5f5, #ffffff);
+    --text-color: #0d0d0d;
+    --sub-text: #555555;
+    --nav-text: #294fcd;
 
+    --upcoming-timeline: rgba(0, 0, 0, 0.08);
+    --circle-border-timeline: rgba(0, 0, 0, 0.2);
+    --circle-timeline: #dddddd;
+
+    --upcoming-card: rgba(0, 0, 0, 0.04);
+    --upcoming-border-card: rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='%23d84c19' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+body.light-mode .navbar-toggler {
+    border-color: rgba(0, 0, 0, 0.2);
 }
 
 html,
@@ -344,6 +362,25 @@ button {
     display: none;
 }
 
+.btn-lang {
+    background: #333;
+    border: 1px solid var(--text-color);
+    color: white;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-family: a, sans-serif;
+    transition: background 0.2s, color 0.2s;
+    cursor: none;
+}
+
+.btn-lang:hover {
+    background: var(--gradient-btn);
+    color: #fff;
+}
+
 
 /* SECTION VIDEO */
 .video-hero {
@@ -430,8 +467,8 @@ button {
 /* Hover */
 .btn-custom:hover {
     background: var(--primary-color) !important;
-    border-color: var(--bg-color) !important;
-    color: black!important;
+    border-color: var(--text-color) !important;
+    color: var(--text-color) !important;
     transform: translateY(-3px);
 }
 
@@ -511,6 +548,20 @@ button {
     position: relative;
     width: 130px;
     height: 130px;
+    animation: floatCircle 3s ease-in-out infinite;
+}
+
+.skill-circle-wrap:hover .skill-circle-inner {
+    animation: hoverLift 0.4s var(--smoothanimation) forwards;
+}
+
+@keyframes floatCircle {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-10px); }
+}
+
+@keyframes hoverLift {
+    to { transform: translateY(-14px); }
 }
 
 .skill-svg {
@@ -581,6 +632,14 @@ button {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     line-height: 1;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+}
+
+.skill-circle-wrap:hover .skill-circle-percent {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .skill-circle-name {
@@ -757,7 +816,7 @@ ul li::before {
     width: 2px;
     height: calc(100% + 150px);
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.06);
+    background: var(--upcoming-timeline);
     -webkit-mask-image: linear-gradient(transparent 0%, black 10%, black 90%, transparent 100%);
     mask-image: linear-gradient(transparent 0%, black 10%, black 90%, transparent 100%);
 }
@@ -799,8 +858,8 @@ ul li::before {
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: #222222;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: var(--circle-timeline);
+    border: 1px solid var(--circle-border-timeline);
 }
 
 .upcoming-date {
@@ -808,7 +867,7 @@ ul li::before {
     flex-shrink: 0;
     font-size: 2.8rem !important;
     font-weight: 800 !important;
-    color: var(--sub-text) !important;
+    color: #555353 !important;
     line-height: 1.15 !important;
     padding-top: 14px;
     text-transform: uppercase;
@@ -819,10 +878,41 @@ ul li::before {
 .upcoming-card {
     flex: 0 1 800px;
     margin-left: 110px;
-    background: rgba(255, 255, 255, 0.015);
+    background: var(--upcoming-card);
+    background-size: 300% 300%;
     border-radius: 10px;
     padding: 36px 36px;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--upcoming-border-card);
+    transition: background 0.5s ease, border-color 0.5s ease, transform 0.3s var(--smoothanimation);
+}
+
+.upcoming-card:hover {
+    transform: scale(1.02);
+    background: linear-gradient(90deg,
+        rgba(255, 255, 255, 0.01),
+        rgba(216, 76, 25, 0.12),
+        rgba(255, 107, 107, 0.07),
+        rgba(255, 255, 255, 0.01)
+    );
+    background-size: 300% 100%;
+    border-color: rgba(216, 76, 25, 0.25);
+    animation: cardGradientShift 5s linear infinite, cardShake 0.45s var(--smoothanimation) 1;
+}
+
+@keyframes cardGradientShift {
+    0%   { background-position: 100% 0%; }
+    100% { background-position: 0% 0%; }
+}
+
+@keyframes cardShake {
+    0%   { transform: scale(1)    translateX(0); }
+    15%  { transform: scale(1.02) translateX(-5px); }
+    30%  { transform: scale(1.02) translateX(5px); }
+    45%  { transform: scale(1.02) translateX(-4px); }
+    60%  { transform: scale(1.02) translateX(4px); }
+    75%  { transform: scale(1.02) translateX(-2px); }
+    90%  { transform: scale(1.02) translateX(2px); }
+    100% { transform: scale(1.02) translateX(0); }
 }
 
 .upcoming-badge {
@@ -2038,7 +2128,7 @@ ul li::before {
 
 .footer-bottom p:hover {
     font-size: 13px !important;
-    color: var(--text-color) !important;
+    color: var(--primary-color) !important;
 }
 
 .footer-bottom .highlight {
