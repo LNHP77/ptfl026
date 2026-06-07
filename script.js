@@ -83,6 +83,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // 16. Ligne timeline upcoming fill au scroll
     initTimelineFill();
 
+    // 17. Traduction FR/EN
+    initTranslation();
+
     // 12. Fix scroll mobile : style inline sur chaque modal-body
     //     (équivalent à écrire l'attribut style directement dans le HTML)
     document.querySelectorAll('.ai-modal-body').forEach(el => {
@@ -123,6 +126,27 @@ function initScrollReveal(selector, threshold = 0.15) {
 
 function initTimeline() { initScrollReveal('.timeline-item'); }
 function initPcards()   { initScrollReveal('.pcard', 0.1); }
+
+function initTranslation() {
+    const btn = document.getElementById('lang-toggle');
+    if (!btn) return;
+    let isEN = false;
+
+    btn.addEventListener('click', () => {
+        isEN = !isEN;
+        btn.textContent = isEN ? 'FR' : 'EN';
+        document.documentElement.lang = isEN ? 'en' : 'fr';
+
+        document.querySelectorAll('[data-en]').forEach(el => {
+            if (isEN) {
+                if (!el.dataset.fr) el.dataset.fr = el.innerHTML;
+                el.innerHTML = el.dataset.en;
+            } else {
+                if (el.dataset.fr) el.innerHTML = el.dataset.fr;
+            }
+        });
+    });
+}
 
 // ==================== UPCOMING TIMELINE FILL ====================
 function initTimelineFill() {
