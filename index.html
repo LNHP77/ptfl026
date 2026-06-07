@@ -31,11 +31,13 @@
 
     <div class="collapse navbar-collapse" id="nav">
       <div class="navbar-nav ms-auto gap-3 align-items-center">
-        <a class="nav-link" href="#home">Accueil</a>
-        <a class="nav-link" href="#about">À propos</a>
-        <a class="nav-link" href="#projects">Réalisations</a>
-         <a class="nav-link" href="#contact">Contact</a>
-        
+        <a class="nav-link" href="#home" data-en="Home">Accueil</a>
+        <a class="nav-link" href="#about" data-en="About">À propos</a>
+        <a class="nav-link" href="#projects" data-en="Projects">Réalisations</a>
+        <a class="nav-link" href="#contact">Contact</a>
+
+        <button id="lang-toggle" class="btn-lang">EN</button>
+
         <div class="nav-item">
           <input type="checkbox" class="checkbox" id="checkbox">
           <label for="checkbox" class="checkbox-label">
@@ -100,24 +102,24 @@
 
       <!-- TEXTE -->
       <div class="col-lg-6 text-white">
-        <p class="small text-uppercase letter-spacing">Bonjour à tous</p>
+        <p class="small text-uppercase letter-spacing" data-en="Hello everyone">Bonjour à tous</p>
 
-        <h2 class="display-4 dmp">
+        <h2 class="display-4 dmp" data-en="DISCOVER MY <br><span class='text-dangerr'>PORTFOLIO!</span>">
           DÉCOUVREZ MON <br>
           <span class="text-dangerr">PORTFOLIO !</span>
         </h2>
 
-        <p class="mt-4 text-justify">
+        <p class="mt-4 text-justify" data-en="3rd year BUT MMI student at the University of Guadeloupe — explore my work and projects from this year.">
           Étudiant en 3ème année de BUT MMI à l'IUT de la Guadeloupe,
           vous allez découvrir par le biais de réalisations mon travail durant cette année.
         </p>
 
        <a href="images/CVlnhp.jpg" download class="btn btn-custom mt-4 px-4 py-2 rounded-pill">
-         <b>Téléchargez mon CV</b>
+         <b data-en="Download my CV">Téléchargez mon CV</b>
         </a>
 
          <a href="#contact" class="btn btn-custom mt-4 px-4 py-2 rounded-pill">
-          <b>Contactez moi</b>
+          <b data-en="Contact me">Contactez moi</b>
         </a>
       </div>
 
@@ -160,20 +162,20 @@
     <div class="divider mx-auto mb-5"></div>
     <!-- Titre -->
     <div class="mb-5 reveal">
-      <p class="small text-uppercase letter-spacing">À PROPOS</p>
-      <h2 class="display-4 dmp">QUI SUIS-JE ?</h2>
+      <p class="small text-uppercase letter-spacing" data-en="ABOUT">À PROPOS</p>
+      <h2 class="display-4 dmp" data-en="WHO AM I?">QUI SUIS-JE ?</h2>
     </div>
 
     <div class="row align-items-start">
 
       <!-- TEXTE -->
       <div class="col-lg-6 text-justify">
-        <p class="mt-4 text-justify reveal">
+        <p class="mt-4 text-justify reveal" data-en="Throughout my BUT MMI program, I have progressively developed a genuine interest in the world of multimedia.">
           Au fil de mon parcours en BUT MMI, j’ai progressivement
           développé un réel intérêt pour le monde du multimédia.
         </p>
 
-        <p class="mt-4 text-justify reveal">
+        <p class="mt-4 text-justify reveal" data-en="From web design to graphic arts, through video editing, I have learned to appreciate the diversity and complementarity of these fields. Today, my goal is to work in a role that brings together these skills, such as community manager, in a creative and versatile environment.">
           De la création web à l’infographie,
           en passant par le montage vidéo, j’ai appris à
           apprécier la diversité et la complémentarité de ces
@@ -182,7 +184,7 @@
           dans un environnement créatif et polyvalent.
         </p>
 
-         <p class="mt-4 text-justify reveal">À plus long terme, je souhaite mettre ces
+         <p class="mt-4 text-justify reveal" data-en="In the longer term, I aim to put these skills to use by launching as a freelancer.">À plus long terme, je souhaite mettre ces
              compétences à profit en me lançant en freelance.</p>
 
       </div>
@@ -203,7 +205,7 @@
             <span class="skill-circle-percent">90%</span>
           </div>
         </div>
-        <span class="skill-circle-name">Infographie</span>
+        <span class="skill-circle-name" data-en="Graphic Design">Infographie</span>
       </div>
     </div>
 
@@ -219,7 +221,7 @@
             <span class="skill-circle-percent">85%</span>
           </div>
         </div>
-        <span class="skill-circle-name">Montage vidéo</span>
+        <span class="skill-circle-name" data-en="Video Editing">Montage vidéo</span>
       </div>
     </div>
 
@@ -251,7 +253,7 @@
             <span class="skill-circle-percent">80%</span>
           </div>
         </div>
-        <span class="skill-circle-name">Développement web</span>
+        <span class="skill-circle-name" data-en="Web Development">Développement web</span>
       </div>
     </div>
 
@@ -332,8 +334,8 @@
         <div class="divider mx-auto mb-5"></div>
     <!-- Titre -->
      <div class="col-12 text-center">
-        <p class="small text-uppercase letter-spacing">Mon parcours</p>
-        <h2 class="display-4 dmp">MES EXPÉRIENCES</h2>
+        <p class="small text-uppercase letter-spacing" data-en="My journey">Mon parcours</p>
+        <h2 class="display-4 dmp" data-en="MY EXPERIENCES">MES EXPÉRIENCES</h2>
       </div>
     <div class="upcoming-wrapper" style="margin-top: 110px;">
 
@@ -348,10 +350,10 @@
         <span class="upcoming-date">2024-2026</span>
         <div class="upcoming-card">
           <span class="upcoming-badge badge-png">Parc National de la Guadeloupe</span>
-          <p class="upcoming-title">APPRENTI</p>
-          <ul class="upcoming-desc">
-            <li>Développement de solutions web au sein d'une équipe technique.</li>
-            <li>Utilisation des workflows professionnels et outils collaboratifs.</li>
+          <p class="upcoming-title" data-en="APPRENTICE">APPRENTI</p>
+          <ul class="upcoming-desc" data-en="<li>Content creation for social media / internal network</li><li>Graphic design (flyers, posters, visuals...)</li>">
+            <li>Création de contenus pour les réseaux sociaux/réseau interne</li>
+            <li>Conception graphqiue (flyers, affiches, visuels...)</li>
           </ul>
         </div>
       </div>
@@ -363,8 +365,8 @@
         <span class="upcoming-date">JUIN 2024</span>
         <div class="upcoming-card">
           <span class="upcoming-badge badge-stage">Maison de l'insertion</span>
-          <p class="upcoming-title">Stage infographie</p>
-          <ul class="upcoming-desc">
+          <p class="upcoming-title" data-en="Graphic Design Internship">Stage infographie</p>
+          <ul class="upcoming-desc" data-en="<li>Creating visuals for communication materials.</li><li>Participation in projects combining design and digital tools.</li>">
             <li>Conception de visuels pour supports de communication.</li>
             <li>Participation à des projets mêlant design et outils numériques.</li>
           </ul>
@@ -379,7 +381,7 @@
         <div class="upcoming-card">
           <span class="upcoming-badge badge-but">IUT de la Guadeloupe</span>
           <p class="upcoming-title">BUT MMI</p>
-          <ul class="upcoming-desc">
+          <ul class="upcoming-desc" data-en="<li>Learning web development, graphic design and audiovisual.</li><li>Creating multimedia projects (websites, videos, visual identity).</li>">
             <li>Apprentissage du développement web, du design graphique et de l’audiovisuel.</li>
             <li>Réalisation de projets multimédias (sites web, vidéos, identité visuelle).</li>
           </ul>
@@ -393,8 +395,8 @@
         <span class="upcoming-date">2021 - 2023</span>
         <div class="upcoming-card">
           <span class="upcoming-badge badge-bac">Lycée Raoul Georges Nicolo</span>
-          <p class="upcoming-title">Baccalauréat sti2d</p>
-          <ul class="upcoming-desc">
+          <p class="upcoming-title" data-en="High School Diploma (STI2D)">Baccalauréat sti2d</p>
+          <ul class="upcoming-desc" data-en="<li>Specialization in SIN (Information and Digital Systems).</li><li>Acquiring foundations in programming and digital technologies.</li>">
             <li>Spécialité SIN (Systèmes d’Information et Numérique).</li>
             <li>Acquisition de bases en programmation et technologies numériques.</li>
           </ul>
@@ -411,13 +413,13 @@
         <div class="container mt-5">
           <div class="divider mx-auto mb-5"></div>
             <div class="col-12 text-center mt-4">
-                <p class="small text-uppercase letter-spacing">Mes projets</p>
-                <h2 class="display-4 dmp">MES RÉALISATIONS</h2>
+                <p class="small text-uppercase letter-spacing" data-en="My projects">Mes projets</p>
+                <h2 class="display-4 dmp" data-en="MY WORK">MES RÉALISATIONS</h2>
             </div>
             <div class="filter-container d-flex flex-wrap justify-content-center">
                 <button class="btn-filter active" data-filter="sae">SAE</button>
                 <button class="btn-filter" data-filter="pro">PRO</button>
-                <button class="btn-filter" data-filter="perso">PERSONNEL</button>
+                <button class="btn-filter" data-filter="perso" data-en="PERSONAL">PERSONNEL</button>
             </div>
             
                 <div class="row g-3">
