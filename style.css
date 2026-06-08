@@ -1161,7 +1161,23 @@ ul li::before {
 
 
 /* ── Modales Projets ── */
+.modal-body::-webkit-scrollbar {
+    width: 5px;
+}
 
+.modal-body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: #ff4500;
+    border-radius: 10px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: #ff6b6b;
+}
 
 .ai-modal-content {
     background: #0d0d0d;
@@ -1301,6 +1317,7 @@ ul li::before {
 .aa {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
+
 
 .ai-section-title {
     font-family: URW;
@@ -2139,7 +2156,6 @@ ul li::before {
 /* MODALES MENTIONS LÉGALES */
 
 #mentionsModal .modal-dialog {
-    max-width: 700px;
     min-width: 650px;
     margin: 1.75rem auto;
 }
@@ -2189,14 +2205,36 @@ ul li::before {
 /* Compactage du contenu */
 #mentionsModal .legal-section {
     margin-bottom: 1.5rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 12px;
+}
+
+#mentionsModal .legal-section .ai-section-badge {
+    grid-column: 1;
+    grid-row: 1;
+    margin-top: 0 !important;
+}
+
+#mentionsModal .legal-section strong{
+    color: var(--primary-color) !important;
 }
 
 #mentionsModal .legal-section h4 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
+    grid-column: 2;
+    grid-row: 1;
+    margin-bottom: 0;
+    font-family: URW;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff !important;
 }
 
 #mentionsModal .legal-section p {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-top: 8px;
     font-size: 0.85rem;
     line-height: 1.5;
 }
@@ -2208,19 +2246,19 @@ ul li::before {
 
 
 .modal-legal .modal-content {
-    background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 40px;
+    background: #0d0d0d;
+    border: none;
+    border-radius: 16px;
 }
 
 .modal-legal .modal-header {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 20px 30px;
+    background: #111;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+    padding: 16px 24px;
     justify-content: space-between;
 }
 
 .modal-legal .modal-title {
-    color: white;
     font-family: URW;
     font-weight: 700;
     background: linear-gradient(135deg, #f0680d, #ff4500);
@@ -2230,21 +2268,29 @@ ul li::before {
 }
 
 .btn-close-legal {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: white;
-    width: 35px;
-    height: 35px;
+    width: 40px !important;
+    height: 40px !important;
     border-radius: 50%;
-    transition: all 0.3s ease;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.82rem;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.3s ease;
+    flex-shrink: 0;
 }
 
 .btn-close-legal:hover {
     background: #ff4500;
-    transform: rotate(180deg);
+    border-color: #ff4500;
+    transform: rotate(90deg);
 }
 
 .modal-legal .modal-body {
+    background: #0d0d0d;
     padding: 30px;
 }
 
