@@ -603,9 +603,6 @@
 
 /* Tablets (768px - 1366px) */
 @media (min-width: 768px) and (max-width: 1366px) {
-    .circle {
-        visibility: hidden !important;
-        }
 
     .hero-img img {
         max-width: 480px;
