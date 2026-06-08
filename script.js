@@ -132,17 +132,95 @@ function initTranslation() {
     if (!btn) return;
     let isEN = false;
 
+    const modalLabelMap = {
+        'date/durée': 'DATE / DURATION',
+        'CONTEXTE DÉTAILLÉ': 'DETAILED CONTEXT',
+        'outils utilisés': 'TOOLS USED',
+    };
+
+    // Simple text substitutions for .ai-section-sub (dates, short phrases)
+    const sectionSubTextMap = {
+        'Février 2025': 'February 2025',
+        'Juillet 2025': 'July 2025',
+        'Janvier 2025': 'January 2025',
+        'Avril 2025': 'April 2025',
+        'Avril 2026': 'April 2026',
+        'Année 2025/2026': 'Year 2025/2026',
+        'Adobe Premiere Pro': 'Adobe Premiere Pro',
+    };
+
+    // innerHTML substitutions for .ai-section-sub with HTML tags
+    const sectionSubHtmlFr = 'Une partie des <strong>visuels réalisés sur Photoshop</strong> pour les réseaux sociaux Alpine Inside.';
+    const sectionSubHtmlEn = 'Part of the <strong>visuals created on Photoshop</strong> for Alpine Inside social media.';
+
     btn.addEventListener('click', () => {
         isEN = !isEN;
         btn.textContent = isEN ? 'FR' : 'EN';
         document.documentElement.lang = isEN ? 'en' : 'fr';
 
+        // 1. Swap innerHTML for [data-en] elements
         document.querySelectorAll('[data-en]').forEach(el => {
             if (isEN) {
                 if (!el.dataset.fr) el.dataset.fr = el.innerHTML;
                 el.innerHTML = el.dataset.en;
             } else {
                 if (el.dataset.fr) el.innerHTML = el.dataset.fr;
+            }
+        });
+
+        // 2. Swap placeholder attribute for [data-en-placeholder] elements
+        document.querySelectorAll('[data-en-placeholder]').forEach(el => {
+            if (isEN) {
+                if (!el.dataset.frPlaceholder) el.dataset.frPlaceholder = el.placeholder;
+                el.placeholder = el.getAttribute('data-en-placeholder');
+            } else {
+                if (el.dataset.frPlaceholder) el.placeholder = el.dataset.frPlaceholder;
+            }
+        });
+
+        // 3. Translate repeating structural labels inside modals
+        document.querySelectorAll('.section-title').forEach(el => {
+            const txt = el.textContent.trim();
+            if (isEN) {
+                const en = modalLabelMap[txt];
+                if (en) { el.dataset.frLabel = txt; el.textContent = en; }
+            } else {
+                if (el.dataset.frLabel) { el.textContent = el.dataset.frLabel; delete el.dataset.frLabel; }
+            }
+        });
+
+        // 4. Translate "Voir le projet" button text
+        document.querySelectorAll('.ai-social-btn .text-uppercase').forEach(el => {
+            if (isEN) {
+                if (!el.dataset.frLabel) el.dataset.frLabel = el.textContent.trim();
+                if (el.dataset.frLabel === 'Voir le projet') el.textContent = 'View project';
+                if (el.dataset.frLabel === 'Voir la vidéo') el.textContent = 'Watch the video';
+                if (el.dataset.frLabel === 'Voir le site') el.textContent = 'Visit the site';
+            } else {
+                if (el.dataset.frLabel) { el.textContent = el.dataset.frLabel; delete el.dataset.frLabel; }
+            }
+        });
+
+        // 5. Translate .ai-section-sub elements (dates + filler HTML contexts)
+        document.querySelectorAll('.ai-section-sub').forEach(el => {
+            if (!el.hasAttribute('data-en')) {
+                if (isEN) {
+                    const txt = el.textContent.trim();
+                    const en = sectionSubTextMap[txt];
+                    if (en) {
+                        el.dataset.frLabel = txt;
+                        el.textContent = en;
+                    } else {
+                        const html = el.innerHTML.trim();
+                        if (html === sectionSubHtmlFr) {
+                            el.dataset.frHtml = html;
+                            el.innerHTML = sectionSubHtmlEn;
+                        }
+                    }
+                } else {
+                    if (el.dataset.frLabel) { el.textContent = el.dataset.frLabel; delete el.dataset.frLabel; }
+                    if (el.dataset.frHtml) { el.innerHTML = el.dataset.frHtml; delete el.dataset.frHtml; }
+                }
             }
         });
     });
@@ -361,7 +439,7 @@ function initCustomCursor() {
     circles = document.querySelectorAll(".circle");
     if (circles.length === 0) return;
     
-    const colors = ["orangered"];
+    const colors = ["#e8490f"];
     
     circles.forEach(function (circle, index) {
         circle.x = 0;
