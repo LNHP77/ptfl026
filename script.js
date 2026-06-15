@@ -4,7 +4,7 @@
     if (!video) return;
     video.src = window.matchMedia('(max-width: 991px)').matches
         ? 'introptflresponsive.mp4'
-        : 'ii.mp4';
+        : 'intro.mp4';
     video.muted = true;
     video.load();
     video.addEventListener('canplay', function () {
