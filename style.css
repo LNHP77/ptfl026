@@ -1244,7 +1244,7 @@ ul li::before {
 }
 
 .ai-modal-body {
-    background: #0d0d0d;
+    background: radial-gradient(#2b2a2a, #000000);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
