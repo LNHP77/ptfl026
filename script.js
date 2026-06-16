@@ -3,7 +3,7 @@
     const video = document.getElementById('hero-video');
     if (!video) return;
     video.src = window.matchMedia('(max-width: 991px)').matches
-        ? 'introptflresponsive.mp4'
+        ? 'introresponsive.mp4'
         : 'intro.mp4';
     video.muted = true;
     video.load();
