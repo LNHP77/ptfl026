@@ -2162,6 +2162,7 @@ ul li::before {
 
 /* Scroll interne */
 #mentionsModal .modal-body {
+    background: radial-gradient(#2b2a2a, #000000);
     max-height: 60vh;
     overflow-y: auto;
     padding: 1.5rem;
