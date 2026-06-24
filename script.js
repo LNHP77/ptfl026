@@ -674,6 +674,60 @@ if (btnFermer) {
     });
 }
 
+// ==================== FORMULAIRE CONTACT ====================
+const BACKEND_URL = 'https://ptfl2026.onrender.com';
+
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const btn = form.querySelector('.submit-btn');
+        const btnText = btn.querySelector('span');
+        const originalText = btnText.textContent;
+
+        btn.disabled = true;
+        btnText.textContent = '...';
+
+        const data = {
+            name: form.name.value.trim(),
+            email: form.email.value.trim(),
+            phone: form.phone.value.trim(),
+            subject: form.subject.value,
+            message: form.message.value.trim(),
+        };
+
+        try {
+            const res = await fetch(`${BACKEND_URL}/contact`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+
+            if (!res.ok) throw new Error();
+
+            btnText.textContent = '✓ MESSAGE ENVOYÉ';
+            btn.style.background = 'linear-gradient(45deg, #28a745, #20c997)';
+            form.reset();
+            setTimeout(() => {
+                btnText.textContent = originalText;
+                btn.style.background = '';
+                btn.disabled = false;
+            }, 4000);
+        } catch {
+            btnText.textContent = '✗ ERREUR — RÉESSAYEZ';
+            btn.style.background = 'linear-gradient(45deg, #dc3545, #c82333)';
+            setTimeout(() => {
+                btnText.textContent = originalText;
+                btn.style.background = '';
+                btn.disabled = false;
+            }, 4000);
+        }
+    });
+});
+
 // Animation au scroll pour la section contact
 const contactWrapper = document.querySelector(".contact-wrapper");
 
