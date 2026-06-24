@@ -9,7 +9,7 @@ const pool = new Pool({
   ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false,
 });
 
-app.use(cors({ origin: process.env.FRONTEND_URL || '*' }));
+app.use(cors({ origin: (process.env.FRONTEND_URL || '*').replace(/\/$/, '') }));
 app.use(express.json());
 
 // Création de la table au démarrage si elle n'existe pas
