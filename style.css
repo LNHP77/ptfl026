@@ -1887,8 +1887,9 @@ ul li::before {
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--sub-text);
 }
+
 
 .form-group select option {
     background: #1a1a1a;
