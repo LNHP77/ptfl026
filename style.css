@@ -1882,6 +1882,11 @@ ul li::before {
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
+    color: rgba(234, 64, 7, 0.5);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
     color: rgba(255, 255, 255, 0.3);
 }
 
